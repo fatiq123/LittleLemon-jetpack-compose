@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LittleLemonApp</string>
+    <string name="orderbuttontext">Order an item</string>
 </resources>

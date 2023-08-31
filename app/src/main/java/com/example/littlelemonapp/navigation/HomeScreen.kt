@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -34,9 +35,13 @@ import com.example.littlelemonapp.model.DishRepository
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    TopAppBar()
+    /*TopAppBar()
     UpperPanel()
-    LowerPanel(navController = navController, DishRepository.dishes)
+    LowerPanel(navController = navController, DishRepository.dishes)*/
+    Column(modifier = Modifier.fillMaxHeight()) {
+        TopAppBar()
+        UpperPanel()
+    }
 }
 
 

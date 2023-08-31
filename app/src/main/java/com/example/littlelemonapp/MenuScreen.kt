@@ -2,6 +2,7 @@ package com.example.littlelemonapp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,15 +28,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.littlelemonapp.ui.theme.LittleLemonAppTheme
 
 
 @Composable
-fun MenuScreen() {
+fun MenuScreen(navController: NavController) {
 
     Column {
         UpperPanel2()
-        LowerPanel2()
+        LowerPanel2(onClick = navController.navigate(""))
     }
 
 }
@@ -63,12 +65,13 @@ private fun UpperPanel2() {
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+        color = Color(0xFF495E57)
     )
 }
 
 @Composable
-private fun LowerPanel2() {
+fun LowerPanel2(onClick: (detail: Dish) -> Unit) {
     Column {
         LazyRow {
             items(Categories) { category ->
@@ -77,12 +80,12 @@ private fun LowerPanel2() {
         }
         Divider(
             modifier = Modifier.padding(8.dp),
-            color = Color.Gray,
+            color = Color(0xFFF4CE14),
             thickness = 1.dp
         )
         LazyColumn {
             items(Dishes) { Dish ->
-                MenuDish(Dish)
+                MenuDish(Dish, detail = Dish,onClick = onClick)
             }
         }
     }
@@ -92,7 +95,10 @@ private fun LowerPanel2() {
 fun MenuCategory(category: String) {
     Button(
         onClick = { /*TODO*/ },
-        colors = ButtonDefaults.buttonColors(Color.LightGray),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFFF4CE14),
+            contentColor = Color(0xFF495E57)
+        ),
         shape = RoundedCornerShape(40),
         modifier = Modifier.padding(5.dp)
     ) {
@@ -103,10 +109,13 @@ fun MenuCategory(category: String) {
 }
 
 @Composable
-fun MenuDish(Dish: Dish) {
+fun MenuDish(Dish: Dish, detail: Dish, onClick: (detail: Dish) -> Unit) {
     Card(
         shape = RoundedCornerShape(0.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        modifier = Modifier.clickable {
+            onClick(detail)
+        }
     ) {
         Row(
             modifier = Modifier
@@ -115,7 +124,7 @@ fun MenuDish(Dish: Dish) {
         ) {
             Column {
                 Text(
-                    text = Dish.name, fontSize = 18.sp, fontWeight = Bold
+                    text = Dish.name, fontSize = 18.sp, fontWeight = Bold, color = Color(0xFF495E57)
                 )
                 Text(
                     text = Dish.description,
@@ -136,7 +145,7 @@ fun MenuDish(Dish: Dish) {
     }
     Divider(
         modifier = Modifier.padding(start = 8.dp, end = 8.dp),
-        color = Color.LightGray,
+        color = Color(0xFFF4CE14),
         thickness = 1.dp,
     )
 }

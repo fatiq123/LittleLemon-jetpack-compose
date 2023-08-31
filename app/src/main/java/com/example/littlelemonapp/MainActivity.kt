@@ -1,5 +1,6 @@
 package com.example.littlelemonapp
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,6 +13,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -47,28 +53,58 @@ import com.example.littlelemonapp.ui.theme.Purple80
 import com.example.littlelemonapp.ui.theme.PurpleGrey80
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             LittleLemonAppTheme {
-                val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = Home.route) {
-                    composable(route = Home.route) {
-                        HomeScreen(navController = navController)
-                    }
-                    composable(route = DishDetails.route + "/{${DishDetails.argDishId}}",
-                        arguments = listOf(
-                            navArgument(name = DishDetails.argDishId) {
-                                type = NavType.IntType
+                val scaffoldState = rememberScaffoldState()
+
+                Scaffold(
+                    bottomBar = {
+                        BottomAppBar(contentPadding = PaddingValues(horizontal = 100.dp),actions = {
+                            IconButton(onClick = {
+
+                            }) {
+                                Icon(imageVector = Icons.Default.Home, contentDescription = "Home")
                             }
-                        )) {
-                        val id = requireNotNull(it.arguments?.getInt(DishDetails.argDishId)) {
-                            "Dish id is null"
-                        }
-                        DishDetails(id = id)
+                            IconButton(onClick = {
+
+                            }) {
+                                Icon(
+                                    imageVector = Icons.Default.Settings,
+                                    contentDescription = "Settings"
+                                )
+                            }
+                        })
                     }
+                ) {
+                    App()
                 }
+
             }
+        }
+    }
+}
+
+
+@Composable
+fun App() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Home.route) {
+        composable(route = Home.route) {
+            HomeScreen(navController = navController)
+        }
+        composable(route = DishDetails.route + "/{${DishDetails.argDishId}}",
+            arguments = listOf(
+                navArgument(name = DishDetails.argDishId) {
+                    type = NavType.IntType
+                }
+            )) {
+            val id = requireNotNull(it.arguments?.getInt(DishDetails.argDishId)) {
+                "Dish id is null"
+            }
+            DishDetails(id = id)
         }
     }
 }

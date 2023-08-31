@@ -1,30 +1,41 @@
 package com.example.littlelemonapp
 
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.littlelemonapp.model.Dish
+import com.example.littlelemonapp.navigation.DishDetails
 
 @Composable
-fun LowerPanel() {
+fun LowerPanel(navController: NavHostController, dishes: List<Dish> = listOf()) {
     Column {
         WeeklySpecialCard()
-        MenuDish()
+        LazyColumn {
+            itemsIndexed(dishes) { _, dish ->
+                MenuDish(navController = navController, dish = dish)
+            }
+        }
     }
 
 }
@@ -36,17 +47,19 @@ fun WeeklySpecialCard() {
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            text = "Weekly Special",
-            fontSize = 26.sp,
-            fontWeight = FontWeight.Bold,
+            text = stringResource(id = R.string.weekly_special),
+            style = MaterialTheme.typography.h1,
             modifier = Modifier.padding(8.dp)
         )
     }
 }
 
 @Composable
-fun MenuDish() {
-    Card(shape = RoundedCornerShape(0.dp)) {
+fun MenuDish(navController: NavHostController? = null, dish: Dish) {
+    Card(shape = RoundedCornerShape(0.dp), modifier = Modifier.clickable {
+        Log.d("AAA","Click: ${dish.id}")
+//        navController.navigate(DishDetails.route + "/${dish.id}")
+    }) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -75,24 +88,26 @@ fun MenuDish() {
             }
             Image(
                 painter = painterResource(id = R.drawable.upperpanelimage),
-                contentDescription = "UpperPanelImage"
+                contentDescription = "Upper Panel Image"
             )
         }
 
     }
-    Divider(modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+    Divider(
+        modifier = Modifier.padding(start = 8.dp, end = 8.dp),
         color = Color.LightGray,
         thickness = 1.dp
     )
 }
 
 
-@Preview(showBackground = true)
+@Preview(showSystemUi = true)
 @Composable
 fun PreviewWeeklyCard() {
     WeeklySpecialCard()
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun PreviewMenuDish() {
@@ -104,4 +119,4 @@ fun PreviewMenuDish() {
 @Composable
 fun PreviewLowerPanel() {
     LowerPanel()
-}
+}*/

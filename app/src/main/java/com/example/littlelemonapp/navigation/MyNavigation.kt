@@ -1,5 +1,6 @@
 package com.example.littlelemonapp.navigation
 
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,6 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key.Companion.Menu
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,11 +22,11 @@ fun MyNavigation() {
         startDestination = Home.route
     ) {
         composable(Home.route) {
-            HomeScreen(navController = navController)
+//            HomeScreen(navController = navController)
         }
-        composable(Menu.route) {
-            MenuListScreen()
-        }
+   /*     composable(Menu.route) {
+//            MenuListScreen()
+        }*/
 
 
     }
@@ -36,7 +38,7 @@ fun MyNavigation() {
 private fun AppScreen() {
     Scaffold(
         topBar = {
-            TopAppBar()
+//            TopAppBar()
         }
     ) {
         Box(

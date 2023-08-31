@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.example.littlelemonapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.littlelemonapp"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -66,6 +66,16 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+
+
+    implementation("androidx.compose.animation:animation:1.5.0")
+    implementation("androidx.compose.foundation:foundation:1.5.0")
+    implementation("androidx.compose.material:material:1.5.0")
+    implementation("androidx.compose.material3:material3:1.1.1")
+    implementation("androidx.compose.runtime:runtime:1.5.0")
+    implementation("androidx.compose.ui:ui:1.5.0")
+
 
     val nav_version = "2.7.1"
 

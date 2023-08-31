@@ -4,6 +4,22 @@ import com.example.littlelemonapp.R
 
 interface Destinations {
     val route: String
+}
+
+object Home: Destinations {
+    override val route: String
+        get() = "Home"
+}
+
+object DishDetails: Destinations {
+    override val route: String
+        get() = "Menu"
+
+    const val argDishId = "dishId"
+}
+/*
+interface Destinations {
+    val route: String
     val icon: Int
     val title: String
 }
@@ -35,4 +51,4 @@ object Location: Destinations {
     override val title: String
         get() = "Location"
 
-}
+}*/

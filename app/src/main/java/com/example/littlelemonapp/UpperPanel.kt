@@ -2,11 +2,15 @@ package com.example.littlelemonapp
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeightIn
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -27,6 +31,8 @@ fun UpperPanel() {
     val context = LocalContext.current.applicationContext
     Column(
         modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color(0xFF495E57))
             .padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 16.dp)
     )
     {

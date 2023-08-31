@@ -14,6 +14,7 @@ import androidx.compose.material.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,8 +24,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.littlelemonapp.ui.theme.LittleLemonAppTheme
 
 
 @Composable
@@ -32,7 +35,7 @@ fun MenuScreen() {
 
     Column {
         UpperPanel2()
-//        LowerPanel2()
+        LowerPanel2()
     }
 
 }
@@ -64,12 +67,12 @@ private fun UpperPanel2() {
     )
 }
 
-/*@Composable
+@Composable
 private fun LowerPanel2() {
     Column {
         LazyRow {
             items(Categories) { category ->
-                MenuCategory(category)
+                MenuCategory(category = category)
             }
         }
         Divider(
@@ -83,7 +86,7 @@ private fun LowerPanel2() {
             }
         }
     }
-}*/
+}
 
 @Composable
 fun MenuCategory(category: String) {
@@ -99,9 +102,12 @@ fun MenuCategory(category: String) {
     }
 }
 
-/*@Composable
-fun MenuDish(*//*Dish: Dish*//*) {
-    Card {
+@Composable
+fun MenuDish(Dish: Dish) {
+    Card(
+        shape = RoundedCornerShape(0.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -131,18 +137,10 @@ fun MenuDish(*//*Dish: Dish*//*) {
     Divider(
         modifier = Modifier.padding(start = 8.dp, end = 8.dp),
         color = Color.LightGray,
-        thickness = 1.dp
+        thickness = 1.dp,
     )
-}*/
+}
 
-
-
-
-
-
-
-
-/*
 
 val Categories = listOf(
     "Lunch",
@@ -156,7 +154,7 @@ data class Dish(
     val name: String,
     val price: String,
     val description: String,
-    val image: Int
+    val image: Int,
 )
 
 val Dishes = listOf(
@@ -214,4 +212,13 @@ val Dishes = listOf(
         "This comes straight from grandma recipe book, every last ingredient has...",
         R.drawable.lemondessert
     )
-)*/
+)
+
+
+@Preview(showSystemUi = true)
+@Composable
+fun PreviewMenuScreen() {
+    LittleLemonAppTheme {
+        MenuScreen()
+    }
+}

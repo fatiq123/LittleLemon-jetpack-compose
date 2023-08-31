@@ -4,7 +4,7 @@ import com.example.littlelemonapp.R
 
 object DishRepository {
 
-    val dishes = listOf(
+    private val dishes = listOf(
         Dish(
             1,
             "Greek Salad",

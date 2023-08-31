@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -61,7 +62,7 @@ class MainActivity : ComponentActivity() {
                 val scaffoldState = rememberScaffoldState()
 
                 Scaffold(
-                    bottomBar = {
+                   /* bottomBar = {
                         BottomAppBar(contentPadding = PaddingValues(horizontal = 100.dp),actions = {
                             IconButton(onClick = {
 
@@ -77,9 +78,12 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                         })
-                    }
+                    }*/
                 ) {
-                    App()
+                    Box(modifier = Modifier.padding(it)){
+                        App()
+                    }
+
                 }
 
             }
@@ -94,6 +98,9 @@ fun App() {
     NavHost(navController = navController, startDestination = Home.route) {
         composable(route = Home.route) {
             HomeScreen(navController = navController)
+        }
+        composable(route = "detail") {
+            MenuScreen(navController = navController)
         }
         composable(route = DishDetails.route + "/{${DishDetails.argDishId}}",
             arguments = listOf(

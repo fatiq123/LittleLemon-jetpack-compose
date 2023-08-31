@@ -6,12 +6,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,9 +27,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun UpperPanel() {
+fun UpperPanel(navController: NavController? = null) {
     val context = LocalContext.current.applicationContext
     Column(
         modifier = Modifier
@@ -74,11 +72,12 @@ fun UpperPanel() {
         }
         Button(
             onClick = {
-                Toast.makeText(
+                /*Toast.makeText(
                     context,
                     "Order received, thanks",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
+                      navController?.navigate("detail")
             },
             shape = RoundedCornerShape(size = 5.dp),
             colors = ButtonDefaults.buttonColors(
@@ -110,7 +109,7 @@ fun UpperPanel() {
 fun PreviewUpperPanel() {
     Column(modifier = Modifier.fillMaxHeight()) {
         TopAppBar()
-        UpperPanel()
+//        UpperPanel()
     }
 
 }

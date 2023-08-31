@@ -40,7 +40,7 @@ fun HomeScreen(navController: NavHostController) {
     LowerPanel(navController = navController, DishRepository.dishes)*/
     Column(modifier = Modifier.fillMaxHeight()) {
         TopAppBar()
-        UpperPanel()
+        UpperPanel(navController = navController)
     }
 }
 

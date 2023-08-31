@@ -29,15 +29,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.littlelemonapp.navigation.DishDetails
 import com.example.littlelemonapp.ui.theme.LittleLemonAppTheme
 
 
 @Composable
-fun MenuScreen(navController: NavController) {
+fun MenuScreen(navController: NavController? = null) {
 
     Column {
         UpperPanel2()
-        LowerPanel2(onClick = navController.navigate(""))
+        LowerPanel2()
     }
 
 }
@@ -71,7 +72,7 @@ private fun UpperPanel2() {
 }
 
 @Composable
-fun LowerPanel2(onClick: (detail: Dish) -> Unit) {
+fun LowerPanel2() {
     Column {
         LazyRow {
             items(Categories) { category ->
@@ -85,7 +86,7 @@ fun LowerPanel2(onClick: (detail: Dish) -> Unit) {
         )
         LazyColumn {
             items(Dishes) { Dish ->
-                MenuDish(Dish, detail = Dish,onClick = onClick)
+                MenuDish(Dish)
             }
         }
     }
@@ -109,12 +110,12 @@ fun MenuCategory(category: String) {
 }
 
 @Composable
-fun MenuDish(Dish: Dish, detail: Dish, onClick: (detail: Dish) -> Unit) {
+fun MenuDish(Dish: Dish) {
     Card(
         shape = RoundedCornerShape(0.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = Modifier.clickable {
-            onClick(detail)
+//            onClick(detail)
         }
     ) {
         Row(

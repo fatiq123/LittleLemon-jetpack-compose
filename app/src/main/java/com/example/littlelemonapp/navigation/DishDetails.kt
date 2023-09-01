@@ -1,5 +1,6 @@
 package com.example.littlelemonapp.navigation
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,13 +26,13 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.littlelemonapp.Dish
 import com.example.littlelemonapp.R
 import com.example.littlelemonapp.TopAppBar
 import com.example.littlelemonapp.model.DishRepository
@@ -39,6 +40,7 @@ import com.example.littlelemonapp.ui.theme.LittleLemonAppTheme
 
 @Composable
 fun DishDetails(id: Int) {
+    val context = LocalContext.current.applicationContext
     val dish = requireNotNull(DishRepository.getDish(id = id))
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -56,11 +58,17 @@ fun DishDetails(id: Int) {
         Counter()
         Button(
             onClick = {
-
-            }, shape = RoundedCornerShape(5.dp), colors = ButtonDefaults.buttonColors(
+                Toast.makeText(
+                    context,
+                    "Your ${dish.name} order is received for $${dish.price} dollars",
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            shape = RoundedCornerShape(5.dp), colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFF4CE14),
                 contentColor = Color(0xFF495E57)
-            ), modifier = Modifier
+            ),
+            modifier = Modifier
                 .fillMaxWidth()
                 .align(CenterHorizontally)
         ) {

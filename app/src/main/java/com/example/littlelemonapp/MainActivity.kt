@@ -1,57 +1,25 @@
 package com.example.littlelemonapp
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.littlelemon.HomeScreen
-import com.example.littlelemonapp.navigation.Destinations
+import com.example.littlelemonapp.navigation.Detail
+import com.example.littlelemonapp.navigation.HomeScreen
 import com.example.littlelemonapp.navigation.DishDetails
 import com.example.littlelemonapp.navigation.Home
 import com.example.littlelemonapp.ui.theme.LittleLemonAppTheme
-import com.example.littlelemonapp.ui.theme.Pink80
-import com.example.littlelemonapp.ui.theme.Purple80
-import com.example.littlelemonapp.ui.theme.PurpleGrey80
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -99,7 +67,7 @@ fun App() {
         composable(route = Home.route) {
             HomeScreen(navController = navController)
         }
-        composable(route = "detail") {
+        composable(route = Detail.route) {
             MenuScreen(navController = navController)
         }
         composable(route = DishDetails.route + "/{${DishDetails.argDishId}}",
@@ -117,51 +85,7 @@ fun App() {
 }
 
 
-/*@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MyApp() {
-    val navController = rememberNavController()
-    Scaffold (
-        bottomBar = {
 
-        }
-    ){
-
-    }
-}*/
-
-
-/*@Composable
-fun MyBottomNavigation(navController: NavController) {
-    val destinationList = listOf(
-        Menu,
-        Home,
-        Location
-    )
-    val selectedIndex = rememberSaveable {
-        mutableStateOf(0)
-    }
-    BottomAppBar {
-        destinationList.forEachIndexed { index, destination ->
-            BottomNavigationItem(
-                label = { Text(text = destination.title) },
-                icon = {
-                    Icon(
-                        painter = painterResource(id = destination.icon),
-                        contentDescription = destination.title
-                    )
-                },
-                selected = index == selectedIndex.value,
-                onClick = {
-                    selectedIndex.value = index
-                    navController.navigate(destinationList[index].route) {
-                        popUpTo(Home.route)
-                        launchSingleTop = true
-                    }
-                })
-        }
-    }
-}*/
 /*@Composable
 fun MenuContent(paddingValues: PaddingValues) {
     Surface(modifier = Modifier.padding(paddingValues = paddingValues)) {

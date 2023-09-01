@@ -28,10 +28,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.littlelemonapp.model.DishRepository
+import com.example.littlelemonapp.navigation.Detail
 
 @Composable
-fun UpperPanel(navController: NavController? = null) {
-    val context = LocalContext.current.applicationContext
+fun UpperPanel(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -72,12 +73,7 @@ fun UpperPanel(navController: NavController? = null) {
         }
         Button(
             onClick = {
-                /*Toast.makeText(
-                    context,
-                    "Order received, thanks",
-                    Toast.LENGTH_SHORT
-                ).show()*/
-                      navController?.navigate("detail")
+                navController.navigate(Detail.route)
             },
             shape = RoundedCornerShape(size = 5.dp),
             colors = ButtonDefaults.buttonColors(
@@ -100,16 +96,14 @@ fun UpperPanel(navController: NavController? = null) {
         color = Color(0xFF495E57),
         modifier = Modifier.padding(8.dp)
     )
-    /*Spacer(modifier = Modifier.height(5.dp))*/
-    LowerPanel2()
+
 }
 
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewUpperPanel() {
-    Column(modifier = Modifier.fillMaxHeight()) {
-        TopAppBar()
+//    Column(modifier = Modifier.fillMaxHeight()) {
 //        UpperPanel()
-    }
+//    }
 
 }

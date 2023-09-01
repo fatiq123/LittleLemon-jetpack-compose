@@ -1,65 +1,64 @@
 package com.example.littlelemonapp
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.example.littlelemonapp.model.Dish
 import com.example.littlelemonapp.navigation.DishDetails
 
 @Composable
-fun LowerPanel(navController: NavHostController, dishes: List<Dish> = listOf()) {
+fun LowerPanel(navController: NavController, dishes: List<Dish> = listOf()) {
     Column {
-        WeeklySpecialCard()
+        LazyRow {
+            items(Categories) { category ->
+                MenuCategory(category = category)
+            }
+        }
+        Divider(
+            modifier = Modifier.padding(8.dp),
+            color = Color(0xFFF4CE14),
+            thickness = 1.dp
+        )
         LazyColumn {
             itemsIndexed(dishes) { _, dish ->
-                MenuDish(navController = navController, dish = dish)
+                MenuDish(dish = dish, navController = navController)
             }
         }
     }
-
 }
 
 @Composable
-fun WeeklySpecialCard() {
+fun MenuDish(dish: Dish, navController: NavController? = null) {
     Card(
         shape = RoundedCornerShape(0.dp),
-        modifier = Modifier.fillMaxWidth()
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        modifier = Modifier.clickable {
+            navController?.navigate(DishDetails.route + "/${dish.id}")
+        }
     ) {
-        Text(
-            text = stringResource(id = R.string.weekly_special),
-            style = MaterialTheme.typography.h1,
-            modifier = Modifier.padding(8.dp)
-        )
-    }
-}
-
-@Composable
-fun MenuDish(navController: NavHostController? = null, dish: Dish) {
-    Card(shape = RoundedCornerShape(0.dp), modifier = Modifier.clickable {
-        Log.d("AAA","Click: ${dish.id}")
-//        navController.navigate(DishDetails.route + "/${dish.id}")
-    }) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -67,56 +66,33 @@ fun MenuDish(navController: NavHostController? = null, dish: Dish) {
         ) {
             Column {
                 Text(
-                    text = "Greek Salad",
+                    text = dish.name, fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
+                    color = Color(0xFF495E57)
                 )
                 Text(
-                    text = "The famous greek salad of " +
-                            "crispy lettuce, peppers, olives, " +
-                            "our Chicago ...",
+                    text = dish.description,
                     color = Color.Gray,
                     modifier = Modifier
                         .padding(top = 5.dp, bottom = 5.dp)
                         .fillMaxWidth(.75f)
                 )
                 Text(
-                    text = "$12.99",
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Gray
+                    text = "$" + dish.price,
+                    color = Color.Gray,
+                    fontWeight = FontWeight.Bold
                 )
             }
             Image(
-                painter = painterResource(id = R.drawable.upperpanelimage),
-                contentDescription = "Upper Panel Image"
+                painter = painterResource(id = dish.imageResource),
+                contentDescription = "",
+                modifier = Modifier.clip(RoundedCornerShape(10.dp))
             )
         }
-
     }
     Divider(
         modifier = Modifier.padding(start = 8.dp, end = 8.dp),
-        color = Color.LightGray,
-        thickness = 1.dp
+        color = Color(0xFFF4CE14),
+        thickness = 1.dp,
     )
 }
-
-
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewWeeklyCard() {
-    WeeklySpecialCard()
-}
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewMenuDish() {
-    MenuDish()
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewLowerPanel() {
-    LowerPanel()
-}*/

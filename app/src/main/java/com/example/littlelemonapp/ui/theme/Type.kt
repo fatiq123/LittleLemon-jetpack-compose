@@ -15,6 +15,28 @@ val Typography = Typography(
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
 
+    ),
+    /* styles used for this project */
+    displayLarge = TextStyle(
+        fontSize = 26.sp,
+        fontWeight = FontWeight.Bold,
+        color = LittleLemonColor.charcoal
+    ),
+    displayMedium = TextStyle(
+        color = LittleLemonColor.charcoal,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold
+    ),
+    bodyMedium = TextStyle(
+        color = LittleLemonColor.green
+    ),
+    bodySmall = TextStyle(
+        fontWeight = FontWeight.Bold,
+        color = LittleLemonColor.green
+    ),
+    labelMedium = TextStyle(
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Bold
     )
             /* Other default text styles to override
             titleLarge = TextStyle(

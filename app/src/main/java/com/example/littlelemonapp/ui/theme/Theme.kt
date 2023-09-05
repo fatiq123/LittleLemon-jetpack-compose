@@ -84,7 +84,7 @@ fun LittleLemonAppTheme(
     val systemUiController = rememberSystemUiController()
     if (darkTheme) {
         systemUiController.setSystemBarsColor(
-            color = Color.Yellow
+            color = Color.Black
         )
     } else {
         systemUiController.setSystemBarsColor(
